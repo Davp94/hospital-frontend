@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { EspecialidadTableComponent } from "./especialidad-table/especialidad-table.component";
 
 @Component({
   selector: 'app-especialidad',
-  imports: [RouterOutlet, EspecialidadTableComponent],
+  imports: [RouterOutlet],
   templateUrl: './especialidad.component.html',
   styleUrl: './especialidad.component.scss'
 })

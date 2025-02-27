@@ -22,11 +22,11 @@ export const routes: Routes = [
             component: EspecialidadMainComponent
           },
           {
-            path: "view",
+            path: "view/:id/operation/:operation",
             component: EspecialidadViewComponent
           },
           {
-            path: "form",
+            path: "form/:id/operation/:operation",
             component: EspecialidadFormComponent
           }
         ]

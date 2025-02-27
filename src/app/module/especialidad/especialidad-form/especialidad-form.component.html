@@ -1,1 +1,13 @@
-<p>especialidad-form works!</p>
+<div class="w-full flex justify-center">
+  <form [formGroup]="especialidadForm" class="grid grid-cols-1 gap-4">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" formControlName="espNombre">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Descripcion</mat-label>
+      <input matInput type="text" formControlName="espDescripcion">
+    </mat-form-field>
+  </form>
+</div>
