@@ -1,3 +1,4 @@
 <div class="w-full h-screen p-10">
-  <especialidad-table></especialidad-table>
+  <button mat-flat-button (click)="createEspecialidad()"></button>
+  <especialidad-table [createdData]="createdData()"></especialidad-table>
 </div>

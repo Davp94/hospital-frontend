@@ -1,1 +1,20 @@
-<p>especialidad-view works!</p>
+<div class="grid grid-cols-2 gap-4">
+  <label>
+    <strong>Identificador:</strong>
+    <!-- string interpolation == tipo de binding-->
+    {{ especialidad.espId }}
+  </label>
+  <label>
+    <strong>Nombre:</strong>
+    {{ especialidad.espNombre }}
+  </label>
+  <label>
+    <strong>Especialidad:</strong>
+    {{ especialidad.espDescripcion }}
+  </label>
+  <div></div>
+  <button mat-flat-button (click)="location.back()">Cancelar</button>
+  @if (validOperation == operationType.DELETE) {
+    <button mat-flat-button (click)="deleteEspecialidad()">Eliminar</button>
+  }
+</div>

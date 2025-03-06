@@ -9,5 +9,14 @@
       <mat-label>Descripcion</mat-label>
       <input matInput type="text" formControlName="espDescripcion">
     </mat-form-field>
+    @if(operation){
+      <button mat-flat-button (click)="location.back()">Cancelar</button>
+      <button mat-flat-button (click)="updateEspecialidad()">Actualizar</button>
+    }
+    @else {
+      <button mat-flat-button (click)="dialogRef?.close(false)">Cancelar</button>
+      <button mat-flat-button (click)="crearEspecialidad()">Registrar</button>
+    }
+
   </form>
 </div>

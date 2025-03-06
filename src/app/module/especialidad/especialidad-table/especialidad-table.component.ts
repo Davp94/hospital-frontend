@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, effect, input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { EspecialidadService } from '../../../core/service/especialidad.service';
@@ -19,9 +19,14 @@ export class EspecialidadTableComponent implements AfterViewInit, OnInit{
   dataSource = new MatTableDataSource<EspecialidadDto>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   operationType: typeof OperationEnum = OperationEnum;
+  createdData = input<boolean>(false);
 
   constructor(private especialidadService: EspecialidadService, private router: Router){
-
+    effect(() => {
+      if(this.createdData()){
+        this.loadEspecialidades();
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -46,6 +51,8 @@ export class EspecialidadTableComponent implements AfterViewInit, OnInit{
     //this.router.navigate("");
     switch(operationType){
       case OperationEnum.CREATE:
+
+      break;
       case OperationEnum.UPDATE:
         this.router.navigateByUrl(`especialidad/form/${id}/operation/${operationType}`);
       break;

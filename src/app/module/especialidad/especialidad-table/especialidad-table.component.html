@@ -23,9 +23,6 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button (click)="operation(element.espId, operationType.CREATE)">
-          <mat-icon>add</mat-icon>
-        </button>
         <button mat-icon-button (click)="operation(element.espId, operationType.UPDATE)">
           <mat-icon>edit</mat-icon>
         </button>
