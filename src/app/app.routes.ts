@@ -7,11 +7,13 @@ import { MainComponent } from './shared/components/main/main.component';
 import { UsuarioComponent } from './module/usuario/usuario.component';
 import { LoginComponent } from './module/login/login.component';
 import { EspecialidadViewComponent } from './module/especialidad/especialidad-view/especialidad-view.component';
+import { authGuard } from './core/guard/auth.guard';
 
 export const routes: Routes = [
   {
     path: "",
     component: MainComponent,
+    canActivate: [authGuard],
     children: [
       {
         path:"especialidad",
