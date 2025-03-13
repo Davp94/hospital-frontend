@@ -13,6 +13,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   login(loginRequestDto: LoginRequestDto): Observable<LoginDto> {
+    console.log("🚀 ~ AuthService ~ login ~ loginRequestDto:", loginRequestDto)
     return this.httpClient.post<LoginDto>('http://localhost:9700/login', loginRequestDto).pipe(
       tap((res: LoginDto) => {
         this.token = res.token;
