@@ -8,6 +8,9 @@ import { UsuarioComponent } from './module/usuario/usuario.component';
 import { LoginComponent } from './module/login/login.component';
 import { EspecialidadViewComponent } from './module/especialidad/especialidad-view/especialidad-view.component';
 import { authGuard } from './core/guard/auth.guard';
+import { IndexComponent } from './shared/components/index/index.component';
+import { DoctorComponent } from './module/doctor/doctor.component';
+import { DoctorListComponent } from './module/doctor/doctor-list/doctor-list.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +18,10 @@ export const routes: Routes = [
     component: MainComponent,
     canActivate: [authGuard],
     children: [
+      {
+        path: "",
+        component: IndexComponent
+      },
       {
         path:"especialidad",
         component: EspecialidadComponent,
@@ -36,6 +43,16 @@ export const routes: Routes = [
       {
         path: "usuario",
         component: UsuarioComponent
+      },
+      {
+        path: "doctores",
+        component: DoctorComponent,
+        children: [
+          {
+            path: "",
+            component: DoctorListComponent
+          }
+        ]
       }
     ]
   },

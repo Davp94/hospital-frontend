@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, effect, input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, effect, inject, input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { EspecialidadService } from '../../../core/service/especialidad.service';
@@ -7,6 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { OperationEnum } from '../../../shared/enum/operation.enum';
 import { Router } from '@angular/router';
+import { AppStore } from '../../../state-management/state.store';
 @Component({
   selector: 'especialidad-table',
   imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule],
@@ -20,6 +21,7 @@ export class EspecialidadTableComponent implements AfterViewInit, OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   operationType: typeof OperationEnum = OperationEnum;
   createdData = input<boolean>(false);
+  store = inject(AppStore);
 
   constructor(private especialidadService: EspecialidadService, private router: Router){
     effect(() => {
@@ -46,22 +48,27 @@ export class EspecialidadTableComponent implements AfterViewInit, OnInit{
     })
   }
 
-  operation(id: number, operationType: OperationEnum){
+  operation(especialidad: EspecialidadDto, operationType?: OperationEnum){
     console.log(operationType)
-    //this.router.navigate("");
-    switch(operationType){
-      case OperationEnum.CREATE:
+    if(this.operationType){
+      switch(operationType){
+        case OperationEnum.CREATE:
 
-      break;
-      case OperationEnum.UPDATE:
-        this.router.navigateByUrl(`especialidad/form/${id}/operation/${operationType}`);
-      break;
-      case OperationEnum.DELETE:
-      case OperationEnum.READ:
-        this.router.navigateByUrl(`especialidad/view/${id}/operation/${operationType}`);
-      break;
-      default: throw new Error("Operacion no permitida")
+        break;
+        case OperationEnum.UPDATE:
+          this.router.navigateByUrl(`especialidad/form/${especialidad.espId}/operation/${operationType}`);
+        break;
+        case OperationEnum.DELETE:
+        case OperationEnum.READ:
+          this.router.navigateByUrl(`especialidad/view/${especialidad.espId}/operation/${operationType}`);
+        break;
+        default: throw new Error("Operacion no permitida")
+      }
+    }else {
+      this.store.addEspecialidadData(especialidad);
     }
+    //this.router.navigate("");
+
 
   }
 }
