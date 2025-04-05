@@ -11,6 +11,9 @@ import { authGuard } from './core/guard/auth.guard';
 import { IndexComponent } from './shared/components/index/index.component';
 import { DoctorComponent } from './module/doctor/doctor.component';
 import { DoctorListComponent } from './module/doctor/doctor-list/doctor-list.component';
+import { HorarioComponent } from './module/horario/horario.component';
+import { CalendarioComponent } from './module/horario/calendario/calendario.component';
+import { ReservacionComponent } from './module/horario/reservacion/reservacion.component';
 
 export const routes: Routes = [
   {
@@ -51,6 +54,20 @@ export const routes: Routes = [
           {
             path: "",
             component: DoctorListComponent
+          }
+        ]
+      },
+      {
+        path: "horario",
+        component: HorarioComponent,
+        children: [
+          {
+            path: "",
+            component: CalendarioComponent
+          },
+          {
+            path: "reservar",
+            component: ReservacionComponent
           }
         ]
       }

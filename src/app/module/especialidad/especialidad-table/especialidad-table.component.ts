@@ -68,7 +68,5 @@ export class EspecialidadTableComponent implements AfterViewInit, OnInit{
       this.store.addEspecialidadData(especialidad);
     }
     //this.router.navigate("");
-
-
   }
 }

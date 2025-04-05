@@ -1,0 +1,28 @@
+<div class="mat-elevation-z8 h-screen w-full flex items-center justify-center">
+  <!--Lista de horarios de la fecha seleccionada-->
+  <div class="flex flex-col gap-4">
+    @for (horario of horarios; track horario) {
+      <mat-card class="mat-elevation-z6 w-[500px]">
+        <mat-card-header>
+          <mat-card-title>
+            Horario {{ horario.horHoraInicio + '-' + horario.horHoraFin }}
+          </mat-card-title>
+          <mat-card-subtitle>Horario disponible para reserva</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <label>{{horario.horDisponible}}</label>
+          <label>{{horario.horFecha}}</label>
+          <label>{{horario.id}}</label>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="realizarReservacion(horario)">RESERVAR</button>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+
+  <!--Cuadro de confirmacion-->
+  <div>
+    
+  </div>
+</div>

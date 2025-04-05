@@ -1,0 +1,8 @@
+<div class="flex flex-col w-[500px] h-50 gap-2 justify-evently p-4">
+  <h1>{{ data.title }}</h1>
+  <h4>{{ data.subtitle }}</h4>
+  <div>
+    <button mat-button (click)="closeDialog()">CANCELAR</button>
+    <button mat-button (click)="confirmDialog()">{{ data.textButton ?? 'CONFIRMAR'}}</button>
+  </div>
+</div>
