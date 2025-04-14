@@ -14,6 +14,7 @@ const initialState: AppState = {
     userData: null,
     especialidad: null,
     doctor: null,
+    fechaReservacion: null,
   },
 }
 
@@ -23,7 +24,8 @@ export const AppStore = signalStore(
   withComputed(({stateApp}) => ({
     userData: computed(()=> stateApp.userData()),
     espId: computed(() => stateApp.especialidad()?.espId),
-    docId: computed(() => stateApp.doctor()?.docId)
+    docId: computed(() => stateApp.doctor()?.docId),
+    fechaReservacion: computed(() => stateApp.fechaReservacion())
   })),
   withMethods(store => ({
     addUserData(userData: PacienteDto){
@@ -48,6 +50,7 @@ export const AppStore = signalStore(
           userData: null,
           especialidad: null,
           doctor: null,
+          fechaReservacion: null,
         }
       })
     },
@@ -56,6 +59,14 @@ export const AppStore = signalStore(
         stateApp: {
           ...store.stateApp(),
           doctor: doctor
+        }
+      })
+    },
+    addFechaReservacion(fecha: string){
+      patchState(store, {
+        stateApp: {
+          ...store.stateApp(),
+          fechaReservacion: fecha
         }
       })
     },

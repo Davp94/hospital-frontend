@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import {MatMenuModule} from '@angular/material/menu';
+import { AuthService } from '../../../core/service/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -21,6 +23,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
+    MatMenuModule,
     AsyncPipe,
     RouterOutlet,
     RouterLink
@@ -28,10 +31,13 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class MainComponent {
   private breakpointObserver = inject(BreakpointObserver);
-
+  authService = inject(AuthService);
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
+    logout() {
+      this.authService.logout();
+    }
 }

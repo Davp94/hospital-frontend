@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { EspecialidadTableComponent } from "../especialidad-table/especialidad-table.component";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +12,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { EspecialidadFormComponent } from '../especialidad-form/especialidad-form.component';
+import { AppStore } from '../../../state-management/state.store';
 
 @Component({
   selector: 'app-especialidad-main',
@@ -22,6 +23,7 @@ import { EspecialidadFormComponent } from '../especialidad-form/especialidad-for
 export class EspecialidadMainComponent {
 
   createdData = signal<boolean>(false);
+  store = inject(AppStore)
   constructor(private matDialog: MatDialog){}
 
   createEspecialidad(){

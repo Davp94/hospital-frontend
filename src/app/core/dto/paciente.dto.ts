@@ -5,4 +5,5 @@ export interface PacienteDto {
   pacApellidos: string;
   pacEstado: number;
   pacFoto: string;
+  rol?: number;
 }

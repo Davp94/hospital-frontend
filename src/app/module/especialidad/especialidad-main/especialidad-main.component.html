@@ -1,4 +1,6 @@
 <div class="w-full h-screen p-10">
-  <button mat-flat-button (click)="createEspecialidad()"></button>
+  @if (store.userData()?.rol != 1) {
+    <button mat-flat-button (click)="createEspecialidad()">CREAR</button>
+  }
   <especialidad-table [createdData]="createdData()"></especialidad-table>
 </div>

@@ -6,5 +6,6 @@ export type StateModelDto = {
   userData: PacienteDto | null,
   especialidad: EspecialidadDto | null,
   doctor: DoctorDto | null
+  fechaReservacion: string | null
   //fechaUltimaReservacion: Date,
 }

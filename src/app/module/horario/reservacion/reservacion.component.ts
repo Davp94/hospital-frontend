@@ -13,7 +13,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-reservacion',
-  imports: [CommonModule, MatCardModule, MatButtonModule, ConfirmationDialogComponent, MatDialogModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatDialogModule],
   templateUrl: './reservacion.component.html',
   styleUrl: './reservacion.component.scss'
 })
@@ -29,7 +29,7 @@ export class ReservacionComponent implements OnInit {
   }
 
   loadHorarios(){
-     this.horarioService.getHorariosByFecha('', true, this.store.docId() as number).subscribe({
+     this.horarioService.getHorariosByFecha(this.store.fechaReservacion() as string, true, this.store.docId() as number).subscribe({
           next: (res: HorarioDto[]) => {
             this.horarios = res
           },
@@ -38,6 +38,7 @@ export class ReservacionComponent implements OnInit {
   }
 
   realizarReservacion(horario: HorarioDto) {
+     console.log("🚀 ~ ReservacionComponent ~ realizarReservacion ~ horario:", horario)
      const dialogRef = this.matDialog.open(ConfirmationDialogComponent, { data: {title: 'Esta seguro de realizar la reservacion?', subtitle: 'Seleccione el boton de Confirmar para realizar la reservacion'}});
         dialogRef.afterClosed().subscribe((response: boolean) => {
           if(response){
@@ -47,7 +48,7 @@ export class ReservacionComponent implements OnInit {
               pacId: this.store.userData()?.pacId as number
            }
            this.reservacionService.createReservacion(data).subscribe({
-             next: (res: ReservacionDto) => console.log(res),
+             next: (res: ReservacionDto) => this.loadHorarios(),
              error: (err: any) => console.log(err)
            })
           }

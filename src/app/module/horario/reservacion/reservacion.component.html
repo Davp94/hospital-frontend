@@ -1,7 +1,7 @@
 <div class="mat-elevation-z8 h-screen w-full flex items-center justify-center">
   <!--Lista de horarios de la fecha seleccionada-->
   <div class="flex flex-col gap-4">
-    @for (horario of horarios; track horario) {
+    @for (horario of horarios; track horario.id) {
       <mat-card class="mat-elevation-z6 w-[500px]">
         <mat-card-header>
           <mat-card-title>
@@ -23,6 +23,6 @@
 
   <!--Cuadro de confirmacion-->
   <div>
-    
+
   </div>
 </div>

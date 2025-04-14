@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { AuthService } from '../../core/service/auth.service';
 import { Router } from '@angular/router';
 import { LoginRequestDto } from '../../core/dto/login-request.dto';
+import { PacienteService } from '../../core/service/paciente.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,9 @@ export class LoginComponent {
       password: this.password
     }
     this.authService.login(authData).subscribe({
-      next: (res:any) => this.router.navigateByUrl('/'),
+      next: (res:any) => {
+        this.router.navigateByUrl('/')
+      },
       error: err => alert('Error en authenticacion')
     })
   }

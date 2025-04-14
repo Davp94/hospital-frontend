@@ -9,19 +9,21 @@ import { PaginationRequestDto } from '../../../core/dto/pagination-request.dto';
 import { ReservacionDto } from '../../../core/dto/reservacion.dto';
 import { PaginationDto } from '../../../core/dto/pagination.dto';
 import { MatSort, Sort } from '@angular/material/sort';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-reservacion-view',
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
   templateUrl: './reservacion-view.component.html',
+  providers: [ReservacionService],
   styleUrl: './reservacion-view.component.scss'
 })
 export class ReservacionViewComponent implements AfterViewInit, OnInit, OnChanges{
-  displayedColumns: string[] = ['id', 'espNombre', 'espDescripcion', 'acciones'];
+  displayedColumns: string[] = ['id', 'espNombre', 'espDescripcion', 'horario','acciones'];
   dataSource = new MatTableDataSource<ReservacionDto>();
   pageRequest: PaginationRequestDto;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -36,7 +38,7 @@ export class ReservacionViewComponent implements AfterViewInit, OnInit, OnChange
       direction: 'ASC',
       page: 0,
       size: 10,
-      sortBy: 'espNombre',
+      sortBy: 'resFechaReserva',
       searchParam: ''
     }
   }
@@ -56,10 +58,10 @@ export class ReservacionViewComponent implements AfterViewInit, OnInit, OnChange
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.sort.sortChange.subscribe((sort: Sort) => {
-      this.pageRequest.direction = sort.direction.toUpperCase();
-      this.loadReservaciones();
-    })
+    // this.sort.sortChange.subscribe((sort: Sort) => {
+    //   this.pageRequest.direction = sort.direction.toUpperCase();
+    //   this.loadReservaciones();
+    // })
   }
 
   loadReservaciones() {

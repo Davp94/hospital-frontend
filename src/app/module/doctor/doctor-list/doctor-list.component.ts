@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { DoctorService } from '../../../core/service/doctor.service';
 import { DoctorDto } from '../../../core/dto/doctor.dto';
 import { AppStore } from '../../../state-management/state.store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-list',
@@ -16,7 +17,7 @@ export class DoctorListComponent implements OnInit{
 
   doctores: DoctorDto[] = [];
   store = inject(AppStore);
-  constructor(private doctorService: DoctorService){}
+  constructor(private doctorService: DoctorService, private router: Router){}
 
   ngOnInit(): void {
     this.loadDoctores();
@@ -27,6 +28,11 @@ export class DoctorListComponent implements OnInit{
       next: (res: DoctorDto[]) => this.doctores = res,
       error: (err: any) => console.log(err)
     })
+  }
+
+  seleccionarDoctor(doctor: DoctorDto){
+    this.store.addDoctor(doctor)
+    this.router.navigateByUrl("/horario")
   }
 
 }

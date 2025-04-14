@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, effect, inject, input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, effect, inject, input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { EspecialidadService } from '../../../core/service/especialidad.service';
@@ -8,13 +8,14 @@ import {MatButtonModule} from '@angular/material/button';
 import { OperationEnum } from '../../../shared/enum/operation.enum';
 import { Router } from '@angular/router';
 import { AppStore } from '../../../state-management/state.store';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'especialidad-table',
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule],
   templateUrl: './especialidad-table.component.html',
   styleUrl: './especialidad-table.component.scss'
 })
-export class EspecialidadTableComponent implements AfterViewInit, OnInit{
+export class EspecialidadTableComponent implements AfterViewInit, OnInit, OnDestroy{
 
   displayedColumns: string[] = ['id', 'espNombre', 'espDescripcion', 'acciones'];
   dataSource = new MatTableDataSource<EspecialidadDto>();
@@ -29,6 +30,16 @@ export class EspecialidadTableComponent implements AfterViewInit, OnInit{
         this.loadEspecialidades();
       }
     })
+    console.log(this.store.userData());
+    const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') || '') : ''
+    if(userData){
+      this.store.addUserData(userData)
+    }
+  }
+  ngOnDestroy(): void {
+    if(this.store.userData()){
+      localStorage.setItem("userData", JSON.stringify(this.store.userData()))
+    }
   }
 
   ngOnInit(): void {
@@ -50,7 +61,7 @@ export class EspecialidadTableComponent implements AfterViewInit, OnInit{
 
   operation(especialidad: EspecialidadDto, operationType?: OperationEnum){
     console.log(operationType)
-    if(this.operationType){
+    if(operationType){
       switch(operationType){
         case OperationEnum.CREATE:
 
@@ -66,6 +77,7 @@ export class EspecialidadTableComponent implements AfterViewInit, OnInit{
       }
     }else {
       this.store.addEspecialidadData(especialidad);
+      this.router.navigateByUrl("/doctores");
     }
     //this.router.navigate("");
   }

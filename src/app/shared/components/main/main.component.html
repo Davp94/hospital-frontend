@@ -7,19 +7,30 @@
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/especialidad']" routerLinkActive="router-link-active" >Especialidad</a>
       <a mat-list-item [routerLink]="['/usuario']">Usuario</a>
+      <a mat-list-item [routerLink]="['/horario']">Horario</a>
+      <a mat-list-item [routerLink]="['/reservaciones']">Mis Reservaciones</a>
       <!-- <a mat-list-item [routerLink]="['/routePath']">Link 3</a> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-        <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()">
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    <mat-toolbar class="bg-gray-900 flex justify-between px-4 h-16">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon class="text-white">menu</mat-icon>
+      </button>
+      <div class="flex text-white mr-4">
+        <button mat-icon-button>
+          <mat-icon class="text-white">space_dashboard</mat-icon>
         </button>
-      <span>hospital-frontend</span>
+        <button mat-icon-button>
+          <mat-icon class="text-white">notifications</mat-icon>
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+          <mat-icon class="text-white">person</mat-icon>
+        </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before" yPosition="below">
+          <button mat-menu-item (click)="logout()">Salir</button>
+        </mat-menu>
+      </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

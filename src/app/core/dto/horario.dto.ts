@@ -1,6 +1,6 @@
 export interface HorarioDto{
   id: number;
-  horFecha : Date;
+  horFecha : string;
   horHoraInicio: string;
   horHoraFin: string;
   horDisponible: boolean;

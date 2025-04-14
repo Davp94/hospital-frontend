@@ -14,6 +14,7 @@ import { DoctorListComponent } from './module/doctor/doctor-list/doctor-list.com
 import { HorarioComponent } from './module/horario/horario.component';
 import { CalendarioComponent } from './module/horario/calendario/calendario.component';
 import { ReservacionComponent } from './module/horario/reservacion/reservacion.component';
+import { ReservacionViewComponent } from './module/horario/reservacion-view/reservacion-view.component';
 
 export const routes: Routes = [
   {
@@ -70,6 +71,10 @@ export const routes: Routes = [
             component: ReservacionComponent
           }
         ]
+      },
+      {
+        path: "reservaciones",
+        component: ReservacionViewComponent
       }
     ]
   },

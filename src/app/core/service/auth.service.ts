@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { LoginRequestDto } from '../dto/login-request.dto';
 import { Observable, tap } from 'rxjs';
 import { LoginDto } from '../dto/login.dto';
+import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +12,12 @@ import { LoginDto } from '../dto/login.dto';
 export class AuthService {
 
   token: string | null = null;
-  constructor(private httpClient: HttpClient) { }
+  private apiUrl = environment.apiUrl;
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   login(loginRequestDto: LoginRequestDto): Observable<LoginDto> {
     console.log("🚀 ~ AuthService ~ login ~ loginRequestDto:", loginRequestDto)
-    return this.httpClient.post<LoginDto>('http://localhost:9700/login', loginRequestDto).pipe(
+    return this.httpClient.post<LoginDto>(`${this.apiUrl}/login`, loginRequestDto).pipe(
       tap((res: LoginDto) => {
         this.token = res.token;
         localStorage.setItem('token', this.token);
@@ -36,5 +39,6 @@ export class AuthService {
   logout(): void {
     this.token = null;
     localStorage.removeItem('token');
+    this.router.navigateByUrl('/login');
   }
 }
