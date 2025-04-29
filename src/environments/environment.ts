@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
-  apiUrl: 'https://oregon.aamazonwebservice/dsadsad/',
+  production: false,
+  apiUrl: 'http://34.207.116.193:9700',
   uploadDir: '/upload'
 };

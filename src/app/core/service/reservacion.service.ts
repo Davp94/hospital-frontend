@@ -5,7 +5,7 @@ import { ReservacionDto } from '../dto/reservacion.dto';
 import { Observable } from 'rxjs';
 import { PaginationRequestDto } from '../dto/pagination-request.dto';
 import { PaginationDto } from '../dto/pagination.dto';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

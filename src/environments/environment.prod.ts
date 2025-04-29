@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
-  apiUrl: 'http://172.31.30.149:9700',
+  production: true,
+  apiUrl: 'http://34.207.116.193:9700',
   uploadDir: '/upload'
 };
